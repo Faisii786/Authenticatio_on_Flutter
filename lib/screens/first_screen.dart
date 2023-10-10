@@ -31,8 +31,8 @@ class _FirstScreenState extends State<FirstScreen> {
           idToken: googleAuth.idToken,
         );
 
+        showSnakBar("Login Successfull");
         await FirebaseAuth.instance.signInWithCredential(credential);
-
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => Dashboard()));
       }
@@ -57,6 +57,37 @@ class _FirstScreenState extends State<FirstScreen> {
       child: ScaffoldMessenger(
         key: SnakBarKey,
         child: Scaffold(
+          // floatingActionButtonLocation:
+          //     FloatingActionButtonLocation.centerDocked,
+          // floatingActionButton: FloatingActionButton(
+          //   backgroundColor: Colors.red,
+          //   onPressed: () {},
+          //   child: Icon(Icons.add),
+          // ),
+          // bottomNavigationBar: BottomAppBar(
+          //   //shape: CircularNotchedRectangle(),
+          //   height: 50,
+          //   color: Colors.grey,
+          //   child: Container(
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //       children: [
+          //         IconButton(
+          //             onPressed: () {},
+          //             icon: Icon(
+          //               Icons.home,
+          //               color: Colors.black,
+          //             )),
+          //         IconButton(
+          //             onPressed: () {},
+          //             icon: Icon(
+          //               Icons.call,
+          //               color: Colors.black,
+          //             )),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           body: Container(
             height: double.infinity,
             width: double.infinity,

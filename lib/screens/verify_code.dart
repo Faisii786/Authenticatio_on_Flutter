@@ -58,58 +58,63 @@ class _VerifyPhoneNumberState extends State<VerifyPhoneNumber> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ScaffoldMessenger(
-        key: SnakBarKey,
-        child: Scaffold(
-          // appBar: AppBar(
-          //   iconTheme: IconThemeData(color: Colors.black),
-          //   backgroundColor: Colors.white,
-          //   elevation: 0,
-          // ),
-          body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(color: Colors.grey[300]),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.deepPurple,
-                      radius: 70,
-                      child: CircleAvatar(
+    return WillPopScope(
+      onWillPop: () async { 
+        return false;
+      },
+      child: SafeArea(
+        child: ScaffoldMessenger(
+          key: SnakBarKey,
+          child: Scaffold(
+            // appBar: AppBar(
+            //   iconTheme: IconThemeData(color: Colors.black),
+            //   backgroundColor: Colors.white,
+            //   elevation: 0,
+            // ),
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(color: Colors.grey[300]),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
                         backgroundColor: Colors.deepPurple,
-                        radius: 60,
-                        backgroundImage:
-                            AssetImage("assets/images/verify_otp.png"),
+                        radius: 70,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.deepPurple,
+                          radius: 60,
+                          backgroundImage:
+                              AssetImage("assets/images/verify_otp.png"),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      child: TextFormField(
-                        controller: phonecontroller,
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            hintText: 'Enter 6 digit code'),
+                      SizedBox(
+                        height: 40,
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    MyButoon(
-                        loading: loading,
-                        title: 'Verify Code',
-                        onPressed: () {
-                          LoginWithNumbe();
-                        })
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: TextFormField(
+                          controller: phonecontroller,
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              hintText: 'Enter 6 digit code'),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MyButoon(
+                          loading: loading,
+                          title: 'Verify Code',
+                          onPressed: () {
+                            LoginWithNumbe();
+                          })
+                    ],
+                  ),
                 ),
               ),
             ),

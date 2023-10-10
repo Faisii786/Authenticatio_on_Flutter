@@ -12,19 +12,25 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut().then((value) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));
-                });
-              },
-              icon: Icon(Icons.logout))
-        ],
+    return WillPopScope(
+      onWillPop: () async { 
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Home Page"),
+          automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut().then((value) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LoginPage()));
+                  });
+                },
+                icon: Icon(Icons.logout))
+          ],
+        ),
       ),
     );
   }

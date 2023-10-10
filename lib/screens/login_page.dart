@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
-
+        showSnakBar("Login Successfull");
         await FirebaseAuth.instance.signInWithCredential(credential);
 
         Navigator.push(
@@ -113,160 +113,165 @@ class _LoginPageState extends State<LoginPage> {
   final SnakBarKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ScaffoldMessenger(
-        key: SnakBarKey,
-        child: Scaffold(
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-            ),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    //lock icon
-                    Icon(
-                      Icons.lock,
-                      size: 60,
-                    ),
-
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    // Wellcome Message
-                    Text(
-                      "Wellcome Back ! Please Login",
-                      style: GoogleFonts.akshar(fontSize: 22),
-                    ),
-
-                    //Textfiled
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Form(
-                        key: MyKey,
-                        child: Column(
+    return WillPopScope(
+      onWillPop: () async{
+        return false; 
+      },
+      child: SafeArea(
+        child: ScaffoldMessenger(
+          key: SnakBarKey,
+          child: Scaffold(
+            body: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      //lock icon
+                      Icon(
+                        Icons.lock,
+                        size: 60,
+                      ),
+    
+                      SizedBox(
+                        height: 20,
+                      ),
+    
+                      // Wellcome Message
+                      Text(
+                        "Wellcome Back ! Please Login",
+                        style: GoogleFonts.akshar(fontSize: 22),
+                      ),
+    
+                      //Textfiled
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Form(
+                          key: MyKey,
+                          child: Column(
+                            children: [
+                              MyTextField(
+                                  controller: emailcontroller, hinttext: 'Email'),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              MyTextField(
+                                  controller: passwordcontroller,
+                                  hinttext: 'Password'),
+                            ],
+                          )),
+    
+                      SizedBox(
+                        height: 10,
+                      ),
+    
+                      //Forget passoword
+                      Padding(
+                        padding: const EdgeInsets.only(right: 13),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            MyTextField(
-                                controller: emailcontroller, hinttext: 'Email'),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            MyTextField(
-                                controller: passwordcontroller,
-                                hinttext: 'Password'),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ForgetPassword()));
+                                },
+                                child: Text(
+                                  "Forget Password?",
+                                  style: GoogleFonts.alatsi(),
+                                )),
                           ],
-                        )),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-
-                    //Forget passoword
-                    Padding(
-                      padding: const EdgeInsets.only(right: 13),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        ),
+                      ),
+    
+                      SizedBox(
+                        height: 10,
+                      ),
+    
+                      //Login button
+                      MyButoon(
+                        loading: loading,
+                        onPressed: () {
+                          ValidateFunction();
+                        },
+                        title: 'Login',
+                      ),
+    
+                      SizedBox(
+                        height: 10,
+                      ),
+    
+                      MySocialButton(
+                          title: 'Continue with Google',
+                          onPressed: () {
+                            loginWithGoogle();
+                          },
+                          image: AssetImage("assets/images/google.png")),
+    
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MySocialButton(
+                          title: 'Continue With Facebook',
+                          onPressed: () {},
+                          image: AssetImage("assets/images/facebook.png")),
+    
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MySocialButton(
+                          title: 'Continue With phone no',
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        LoginWithPhoneNumber()));
+                          },
+                          image: AssetImage("assets/images/phone.png")),
+                      SizedBox(
+                        height: 20,
+                      ),
+    
+                      // Register
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          InkWell(
-                              onTap: () {
+                          Text(
+                            "Not a member?",
+                            style: GoogleFonts.alatsi(
+                              fontSize: 16,
+                            ),
+                          ),
+                          TextButton(
+                              onPressed: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            ForgetPassword()));
+                                            TermsAndConditions()));
                               },
                               child: Text(
-                                "Forget Password?",
-                                style: GoogleFonts.alatsi(),
-                              )),
+                                "Register",
+                                style: GoogleFonts.braahOne(
+                                    fontSize: 18,
+                                    color: Color.fromARGB(255, 46, 11, 105)),
+                              ))
                         ],
                       ),
-                    ),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-
-                    //Login button
-                    MyButoon(
-                      loading: loading,
-                      onPressed: () {
-                        ValidateFunction();
-                      },
-                      title: 'Login',
-                    ),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-
-                    MySocialButton(
-                        title: 'Continue with Google',
-                        onPressed: () {
-                          loginWithGoogle();
-                        },
-                        image: AssetImage("assets/images/google.png")),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-                    MySocialButton(
-                        title: 'Continue With Facebook',
-                        onPressed: () {},
-                        image: AssetImage("assets/images/facebook.png")),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-                    MySocialButton(
-                        title: 'Continue With phone no',
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      LoginWithPhoneNumber()));
-                        },
-                        image: AssetImage("assets/images/phone.png")),
-                    SizedBox(
-                      height: 20,
-                    ),
-
-                    // Register
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Not a member?",
-                          style: GoogleFonts.alatsi(
-                            fontSize: 16,
-                          ),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          TermsAndConditions()));
-                            },
-                            child: Text(
-                              "Register",
-                              style: GoogleFonts.braahOne(
-                                  fontSize: 18,
-                                  color: Color.fromARGB(255, 46, 11, 105)),
-                            ))
-                      ],
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

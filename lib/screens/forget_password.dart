@@ -70,68 +70,73 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   final SnakBarKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: ScaffoldMessenger(
-        key: SnakBarKey,
-        child: Scaffold(
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: Colors.black),
-            backgroundColor: Colors.grey[300],
-            elevation: 0,
-          ),
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
+    return WillPopScope(
+      onWillPop: () async { 
+        return false;
+      },
+      child: SafeArea(
+        child: ScaffoldMessenger(
+          key: SnakBarKey,
+          child: Scaffold(
+            appBar: AppBar(
+              iconTheme: IconThemeData(color: Colors.black),
+              backgroundColor: Colors.grey[300],
+              elevation: 0,
             ),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 20,
-                    ),
-                    //lock icon
-                    Icon(
-                      Icons.lock,
-                      size: 60,
-                    ),
-
-                    //Textfiled
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Form(
-                        key: MyKey,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: MyTextField(
-                                  controller: emailcontroller,
-                                  hinttext: 'Email'),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        )),
-
-                    SizedBox(
-                      height: 10,
-                    ),
-
-                    //Login button
-                    MyButoon(
-                      loading: loading,
-                      onPressed: () {
-                        ForgetFunction();
-                      },
-                      title: 'Reset Password',
-                    ),
-                  ],
+            body: Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      //lock icon
+                      Icon(
+                        Icons.lock,
+                        size: 60,
+                      ),
+    
+                      //Textfiled
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Form(
+                          key: MyKey,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 15),
+                                child: MyTextField(
+                                    controller: emailcontroller,
+                                    hinttext: 'Email'),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          )),
+    
+                      SizedBox(
+                        height: 10,
+                      ),
+    
+                      //Login button
+                      MyButoon(
+                        loading: loading,
+                        onPressed: () {
+                          ForgetFunction();
+                        },
+                        title: 'Reset Password',
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
