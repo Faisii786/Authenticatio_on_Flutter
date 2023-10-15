@@ -41,6 +41,7 @@ dependencies:
   google_sign_in: ^6.1.5
   country_picker: ^2.0.21
   flutter_launcher_icons: ^0.13.1
+  http: ^1.1.0
 
 flutter_launcher_icons:
   android: "app_icon"
