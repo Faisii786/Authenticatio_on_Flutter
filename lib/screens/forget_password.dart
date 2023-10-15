@@ -71,7 +71,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async { 
+      onWillPop: () async {
         return false;
       },
       child: SafeArea(
@@ -101,7 +101,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         Icons.lock,
                         size: 60,
                       ),
-    
+
                       //Textfiled
                       SizedBox(
                         height: 20,
@@ -122,11 +122,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               ),
                             ],
                           )),
-    
+
                       SizedBox(
                         height: 10,
                       ),
-    
+
                       //Login button
                       MyButoon(
                         loading: loading,

@@ -2,6 +2,7 @@ import 'package:apple_ui/screens/dashboard.dart';
 import 'package:apple_ui/screens/login_page.dart';
 import 'package:apple_ui/screens/login_with_phone_number.dart';
 import 'package:apple_ui/screens/registration_page.dart';
+import 'package:apple_ui/screens/terms_and_condition.dart';
 import 'package:apple_ui/ui/button.dart';
 import 'package:apple_ui/ui/login_with_social.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -166,7 +167,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => RegistrationPage()));
+                                builder: (context) => TermsAndConditions()));
                       },
                       title: 'Create Account',
                     ),
